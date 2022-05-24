@@ -4,21 +4,30 @@
 #include "GameScene.h"
 #include "LightGroup.h"
 #include "ParticleManager.h"
+#include "FbxLoader.h"
+#include "PostEffect.h"
+
+#include <memory>
+
+
+// FBX SDKの関数を呼び出す為
+// #include "fbxsdk.h"
 
 // Windowsアプリでのエントリーポイント(main関数)
-int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int)
+int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	// 汎用機能
 	WinApp* win = nullptr;
 	DirectXCommon* dxCommon = nullptr;
-	Input* input = nullptr;	
+	Input* input = nullptr;
 	Audio* audio = nullptr;
 	GameScene* gameScene = nullptr;
+	std::unique_ptr<PostEffect> postEffect;
 
 	// ゲームウィンドウの作成
 	win = new WinApp();
 	win->CreateGameWindow();
-		
+
 	//DirectX初期化処理
 	dxCommon = new DirectXCommon();
 	dxCommon->Initialize(win);
@@ -41,31 +50,41 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int)
 		assert(0);
 		return 1;
 	}
+
 	// ライト静的初期化
 	LightGroup::StaticInitialize(dxCommon->GetDevice());
 	// パーティクルマネージャ初期化
 	ParticleManager::GetInstance()->Initialize(dxCommon->GetDevice());
-#pragma endregion
+
+	FbxLoader::GetInstance()->Initialize(dxCommon->GetDevice());
+
+	// ポストエフェクト用テクスチャの読み込み
+	Sprite::LoadTexture(100, L"Resources/white1x1.png");
+
+	postEffect.reset(new PostEffect());
+	postEffect->Initialize();
+#pragma endregion 汎用機能初期化
 
 	// ゲームシーンの初期化
 	gameScene = new GameScene();
 	gameScene->Initialize(dxCommon, input, audio);
-	
-	// メインループ
-	while (true)
-	{
-		// メッセージ処理
-		if (win->ProcessMessage()) {	break; }
 
+	// メインループ
+	while (win->ProcessMessage() == false)
+	{
 		// 入力関連の毎フレーム処理
 		input->Update();
+
 		// ゲームシーンの毎フレーム処理
 		gameScene->Update();
 
 		// 描画開始
 		dxCommon->PreDraw();
+
+		// ポストエフェクトの描画
+		postEffect->Draw(dxCommon->GetCommandList());
 		// ゲームシーンの描画
-		gameScene->Draw();
+		//gameScene->Draw();
 		// 描画終了
 		dxCommon->PostDraw();
 	}
@@ -73,6 +92,8 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int)
 	safe_delete(gameScene);
 	safe_delete(audio);
 	safe_delete(dxCommon);
+
+	FbxLoader::GetInstance()->Finalize();
 
 	// ゲームウィンドウの破棄
 	win->TerminateGameWindow();

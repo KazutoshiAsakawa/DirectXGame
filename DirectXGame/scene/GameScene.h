@@ -10,8 +10,11 @@
 #include "Audio.h"
 #include "DebugCamera.h"
 #include "LightGroup.h"
+#include "Object3d.h"
 
 #include <vector>
+
+#include<memory>
 
 /// <summary>
 /// ゲームシーン
@@ -59,18 +62,22 @@ public: // メンバ関数
 	void Draw();
 
 private: // メンバ変数
+	// シングルトンインスタンス格納用
 	DirectXCommon* dxCommon = nullptr;
 	Input* input = nullptr;
 	Audio* audio = nullptr;
-	DebugText* debugText;	
+	DebugText* debugText;
+	ParticleManager* particleMan = nullptr;
 
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
-	DebugCamera* camera = nullptr;
-	Sprite* spriteBG = nullptr;
-	ParticleManager* particleMan = nullptr;
+	std::unique_ptr <DebugCamera> camera;
+	std::unique_ptr<Sprite> spriteBG;
 
-	LightGroup* lightGroup = nullptr;
+	std::unique_ptr<LightGroup> lightGroup;
+
+	std::unique_ptr<Model> model1;
+	std::unique_ptr<Object3d> object1;
 };
 
