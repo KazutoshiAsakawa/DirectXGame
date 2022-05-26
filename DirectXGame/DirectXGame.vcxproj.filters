@@ -19,6 +19,9 @@
     <Filter Include="PostEffect">
       <UniqueIdentifier>{98139a34-bc71-407c-8218-67763d45de5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameScene">
+      <UniqueIdentifier>{f2e032d7-6b13-493b-bcdf-ff6acd5c1255}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -51,9 +54,6 @@
     <ClCompile Include="audio\Audio.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="scene\GameScene.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="3d\LightGroup.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -68,6 +68,9 @@
     </ClCompile>
     <ClCompile Include="2d\PostEffect.cpp">
       <Filter>PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\GameScene.cpp">
+      <Filter>GameScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,9 +104,6 @@
     <ClInclude Include="audio\Audio.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="scene\GameScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="3d\LightGroup.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -130,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="2d\PostEffect.h">
       <Filter>PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\GameScene.h">
+      <Filter>GameScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
