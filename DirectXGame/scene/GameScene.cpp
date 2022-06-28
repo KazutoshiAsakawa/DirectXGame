@@ -1,6 +1,6 @@
 ﻿#include "FbxLoader.h"
 #include "GameScene.h"
-#include "Object3d.h"
+#include "FbxObject3d.h"
 
 #include <cassert>
 #include <sstream>
@@ -76,14 +76,14 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	model1.reset(FbxLoader::GetInstance()->LoadModelFromFile("boneTest"));
 
 	// デバイスをセット
-	Object3d::SetDevice(dxCommon->GetDevice());
+	FbxObject3d::SetDevice(dxCommon->GetDevice());
 	// カメラをセット
-	Object3d::SetCamera(camera.get());
+	FbxObject3d::SetCamera(camera.get());
 	// グラフィックスパイプライン生成
-	Object3d::CreateGraphicsPipeline();
+	FbxObject3d::CreateGraphicsPipeline();
 
 	// 3Dオブジェクト生成とモデルのセット
-	object1.reset(new Object3d());
+	object1.reset(new FbxObject3d());
 	object1->Initialize();
 	object1->SetModel(model1.get());
 	object1->PlayAnimation();

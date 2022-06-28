@@ -1,4 +1,4 @@
-#include "Object3d.h"
+#include "FbxObject3d.h"
 #include "FbxLoader.h"
 
 #include <d3dcompiler.h>
@@ -10,12 +10,12 @@ using namespace DirectX;
 /// <summary>
 /// 静的メンバ変数の実体
 /// </summary>
-ID3D12Device* Object3d::device = nullptr;
-Camera* Object3d::camera = nullptr;
-ComPtr<ID3D12RootSignature> Object3d::rootsignature;
-ComPtr<ID3D12PipelineState> Object3d::pipelinestate;
+ID3D12Device* FbxObject3d::device = nullptr;
+Camera* FbxObject3d::camera = nullptr;
+ComPtr<ID3D12RootSignature> FbxObject3d::rootsignature;
+ComPtr<ID3D12PipelineState> FbxObject3d::pipelinestate;
 
-void Object3d::CreateGraphicsPipeline()
+void FbxObject3d::CreateGraphicsPipeline()
 {
 	HRESULT result = S_FALSE;
 	ComPtr<ID3DBlob> vsBlob; // 頂点シェーダオブジェクト
@@ -179,7 +179,7 @@ void Object3d::CreateGraphicsPipeline()
 	if (FAILED(result)) { assert(0); }
 }
 
-void Object3d::Initialize() {
+void FbxObject3d::Initialize() {
 	HRESULT result;
 	// 定数バッファの生成
 	result = device->CreateCommittedResource(
@@ -211,7 +211,7 @@ void Object3d::Initialize() {
 	frameTime.SetTime(0, 0, 0, 1, 0, FbxTime::EMode::eFrames60);
 }
 
-void Object3d::Update() {
+void FbxObject3d::Update() {
 
 	// アニメーション
 	if (isPlay) {
@@ -257,7 +257,7 @@ void Object3d::Update() {
 		constBuffTransform->Unmap(0, nullptr);
 	}
 	// ボーン配列
-	std::vector<Model::Bone>& bones = model->GetBones();
+	std::vector<FbxModel::Bone>& bones = model->GetBones();
 
 	// 定数バッファへデータ転送
 	ConstBufferDataSkin* constMapSkin = nullptr;
@@ -275,7 +275,7 @@ void Object3d::Update() {
 	constBuffSkin->Unmap(0, nullptr);
 }
 
-void Object3d::Draw(ID3D12GraphicsCommandList* cmdList)
+void FbxObject3d::Draw(ID3D12GraphicsCommandList* cmdList)
 {
 	// モデルの割り当てがなければ描画しない
 	if (model == nullptr) {
@@ -297,7 +297,7 @@ void Object3d::Draw(ID3D12GraphicsCommandList* cmdList)
 	model->Draw(cmdList);
 }
 
-void Object3d::PlayAnimation()
+void FbxObject3d::PlayAnimation()
 {
 	FbxScene* fbxScene = model->GetFbxScene();
 	// 0番アニメーション取得

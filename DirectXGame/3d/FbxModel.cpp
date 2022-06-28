@@ -1,12 +1,12 @@
-#include "Model.h"
+#include "FbxModel.h"
 
-Model::~Model()
+FbxModel::~FbxModel()
 {
 	// FBXシーンの解放
 	fbxScene->Destroy();
 }
 
-void Model::CreateBuffers(ID3D12Device* device)
+void FbxModel::CreateBuffers(ID3D12Device* device)
 {
 	HRESULT result;
 	// 頂点データ全体のサイズ
@@ -109,7 +109,7 @@ void Model::CreateBuffers(ID3D12Device* device)
 	);
 }
 
-void Model::Draw(ID3D12GraphicsCommandList* cmdList)
+void FbxModel::Draw(ID3D12GraphicsCommandList* cmdList)
 {
 	// 頂点バッファをセット(VBV)
 	cmdList->IASetVertexBuffers(0, 1, &vbView);

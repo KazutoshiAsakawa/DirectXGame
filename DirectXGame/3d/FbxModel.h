@@ -29,7 +29,7 @@ struct Node
 };
 
 
-class Model
+class FbxModel
 {
 public:
 	// フレンドクラス
@@ -81,7 +81,7 @@ public:	// サブクラス
 
 public: // メンバ関数
 	// デストラクタ
-	~Model();
+	~FbxModel();
 	// バッファ生成
 	void CreateBuffers(ID3D12Device* device);
 	// 描画

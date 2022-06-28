@@ -10,7 +10,7 @@
 #include "Audio.h"
 #include "DebugCamera.h"
 #include "LightGroup.h"
-#include "Object3d.h"
+#include "FbxObject3d.h"
 
 #include <vector>
 
@@ -77,7 +77,7 @@ private: // メンバ変数
 
 	std::unique_ptr<LightGroup> lightGroup;
 
-	std::unique_ptr<Model> model1;
-	std::unique_ptr<Object3d> object1;
+	std::unique_ptr<FbxModel> model1;
+	std::unique_ptr<FbxObject3d> object1;
 };
 

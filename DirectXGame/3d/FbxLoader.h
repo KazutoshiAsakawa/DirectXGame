@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "fbxsdk.h"
-#include "Model.h"
+#include "FbxModel.h"
 
 #include <d3d12.h>
 #include <d3dx12.h>
@@ -58,7 +58,7 @@ public:
 	/// ファイルからFBXモデル読込
 	/// </summary>
 	/// <param name="modelName">モデル名</param>
-	Model* LoadModelFromFile(const string& modelName);
+	FbxModel* LoadModelFromFile(const string& modelName);
 	// void LoadModelFromFile(const string& modelName);
 
 private:
@@ -76,25 +76,25 @@ private: // 場所分からん
 	/// <param name="model">読み込み先モデルオブジェクト</param>
 	/// <param name="fbxNode">解析対象のノード</param>
 	/// <param name="parent">親ノード</param>
-	void ParseNodeRecursive(Model* model, FbxNode* fbxNode,Node* parent = nullptr);
+	void ParseNodeRecursive(FbxModel* model, FbxNode* fbxNode,Node* parent = nullptr);
 
 	/// <summary>
 	/// メッシュ読み取り
 	/// </summary>
 	/// <param name="model">読み込み先モデルオブジェクト</param>
 	/// <param name="fbxNode">解析対象のノード</param>
-	void ParseMesh(Model* model, FbxNode* fbxNode);
+	void ParseMesh(FbxModel* model, FbxNode* fbxNode);
 
 	// 頂点座標読み取り
-	void ParseMeshVertices(Model* model, FbxMesh* fbxMesh);
+	void ParseMeshVertices(FbxModel* model, FbxMesh* fbxMesh);
 	// 面情報読み取り
-	void ParseMeshFaces(Model* model, FbxMesh* fbxMesh);
+	void ParseMeshFaces(FbxModel* model, FbxMesh* fbxMesh);
 	// マテリアル読み取り
-	void ParseMaterial(Model* model, FbxNode* fbxNode);
+	void ParseMaterial(FbxModel* model, FbxNode* fbxNode);
 	// テクスチャ読み込み
-	void LoadTexture(Model* model, const std::string& fullpath);
+	void LoadTexture(FbxModel* model, const std::string& fullpath);
 	// ディレクトリを含んだファイルパスからファイル名を抽出する
 	std::string ExtractFileName(const std::string& path);
 	// スキニング情報の読み取り
-	void PareseSkin(Model* model, FbxMesh* mesh);
+	void PareseSkin(FbxModel* model, FbxMesh* mesh);
 };

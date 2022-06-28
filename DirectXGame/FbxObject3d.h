@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Model.h"
+#include "FbxModel.h"
 #include "Camera.h"
 
 #include <Windows.h>
@@ -10,7 +10,7 @@
 #include <DirectXMath.h>
 #include <string>
 
-class Object3d
+class FbxObject3d
 {
 protected: // エイリアス
 	// Microsoft::WRL::を省略
@@ -46,8 +46,8 @@ public: // 静的メンバ関数
 	/// </summary>
 	static void CreateGraphicsPipeline();
 	// setter
-	static void SetDevice(ID3D12Device* device) { Object3d::device = device; }
-	static void SetCamera(Camera* camera) { Object3d::camera = camera; }
+	static void SetDevice(ID3D12Device* device) { FbxObject3d::device = device; }
+	static void SetCamera(Camera* camera) { FbxObject3d::camera = camera; }
 private: // 静的メンバ変数
 	// デバイス
 	static ID3D12Device* device;
@@ -81,7 +81,7 @@ public: // メンバ関数
 	/// モデルの設定
 	/// </summary>
 	/// <param name="model">モデル</param>
-	void SetModel(Model* model) { this->model = model; }
+	void SetModel(FbxModel* model) { this->model = model; }
 
 	inline void SetRotation(const XMFLOAT3& rotation) { this->rotation = rotation; }
 
@@ -109,5 +109,5 @@ protected: // メンバ変数
 	// アニメーション再生中
 	bool isPlay = false;
 	// モデル
-	Model* model = nullptr;
+	FbxModel* model = nullptr;
 };
