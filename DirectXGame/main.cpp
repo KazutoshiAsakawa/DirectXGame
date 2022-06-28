@@ -32,6 +32,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	dxCommon = new DirectXCommon();
 	dxCommon->Initialize(win);
 
+	PostEffect::SetDevice(dxCommon->GetDevice());
+
 #pragma region 汎用機能初期化
 	// 入力の初期化
 	input = Input::GetInstance();

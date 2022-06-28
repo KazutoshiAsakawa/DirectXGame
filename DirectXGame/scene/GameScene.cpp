@@ -1,6 +1,7 @@
 ﻿#include "FbxLoader.h"
 #include "GameScene.h"
 #include "FbxObject3d.h"
+#include "PostEffect.h"
 
 #include <cassert>
 #include <sstream>
@@ -68,7 +69,6 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio* audio)
 	// カメラ注視点をセット
 	camera->SetTarget({ 0,2.5f,0 });
 	camera->SetDistance(8.0f);
-
 
 	// モデル名を指定してファイル読み込み
 	//model1 = FbxLoader::GetInstance()->LoadModelFromFile("cube");
