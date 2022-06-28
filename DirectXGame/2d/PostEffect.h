@@ -19,8 +19,7 @@ public:
 	/// </summary>
 	struct ConstBufferData
 	{
-		DirectX::XMFLOAT4 color;	// 色 (RGBA)
-		DirectX::XMMATRIX mat;	// ３Ｄ変換行列
+		DirectX::XMFLOAT2 mosaicNum{};
 	};
 
 	static const float clearColor[4];
@@ -81,13 +80,7 @@ private: // メンバ変数
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
 	// 定数バッファ
 	ComPtr<ID3D12Resource> constBuff;
-	// ワールド行列
-	DirectX::XMMATRIX matWorld{};
-	// Z軸回りの回転角
-	float rotation = 0.0f;
-	// 座標
-	DirectX::XMFLOAT2 position{};
-	// 色
-	DirectX::XMFLOAT4 color = { 1, 1, 1, 1 };
+	// モザイクの細かさ
+	DirectX::XMFLOAT2 mosaicNum{};
 };
 
